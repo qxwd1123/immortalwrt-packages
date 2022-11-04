@@ -53,6 +53,18 @@ define Package/adguardhome/description
   Free and open source, powerful network-wide ads and trackers blocking DNS server.
 endef
 
+define Package/adguardhome-bin
+	SECTION:=net
+	CATEGORY:=Network
+	TITLE:=Network-wide ads and trackers blocking DNS server
+	URL:=https://github.com/AdguardTeam/AdGuardHome
+	DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle
+endef
+
+define Package/adguardhome-bin/description
+Free and open source, powerful network-wide ads and trackers blocking DNS server.
+endef
+
 FRONTEND_FILE:=$(PKG_NAME)-frontend-$(PKG_VERSION).tar.gz
 define Download/adguardhome-frontend
 	URL:=https://github.com/AdguardTeam/AdGuardHome/releases/download/v$(PKG_VERSION)/
@@ -76,6 +88,11 @@ define Package/adguardhome/install
 	$(INSTALL_DATA) ./files/adguardhome.config $(1)/etc/config/adguardhome
 endef
 
+define Package/adguardhome-bin/install
+	$(call GoPackage/Package/Install/Bin,$(1))
+endef
+
 $(eval $(call Download,adguardhome-frontend))
 $(eval $(call GoBinPackage,adguardhome))
 $(eval $(call BuildPackage,adguardhome))
+$(eval $(call BuildPackage,adguardhome-bin))
