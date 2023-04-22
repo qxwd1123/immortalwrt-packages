@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=iperf
+PKG_NAME:=iperf3
 PKG_VERSION:=3.17.1
 PKG_RELEASE:=1
 
